@@ -1,27 +1,15 @@
-# MLE ile Akıllı Şehir Trafik Planlaması
+# HMM ile Kelime Tanıma Sistemi (Ödev 1)
 
-Bu proje, şehir trafiğinin yoğunluğunu modellemek amacıyla Poisson Dağılımı ve Maksimum Olabilirlik Tahmini (Maximum Likelihood Estimation - MLE) yöntemlerinin kullanımını içermektedir.
+[cite_start]Bu depo, Ankara Üniversitesi Makine Öğrenmesi dersi (YZM212) için hazırladığım ilk laboratuvar çalışmasını içeriyor. [cite: 1] [cite_start]Projede, Gizli Markov Modelleri (HMM) kullanarak "EV" ve "OKUL" kelimelerini birbirinden ayıran basit bir simülasyon yaptım. [cite: 2]
 
-## Problem Tanımı
-Bir belediyenin ulaşım departmanında, caddelerdeki araç trafiğini optimize etmek için veriye dayalı bir modelleme yapılması hedeflenmektedir. Belirli bir caddeden dakikada geçen araç sayılarının Poisson dağılımına uyduğu varsayılmış ve elimizdeki örneklem verileri üzerinden en uygun yoğunluk parametresinin ($\lambda$) bulunması amaçlanmıştır.
+## Neler Yaptım?
+* [cite_start]**Teorik Hesaplama:** Viterbi algoritmasını kullanarak "EV" kelimesi için en mantıklı fonem dizisini elle hesapladım. [cite: 3, 17]
+* **Python Uygulaması:** `numpy` kullanarak Forward algoritmasını kodladım. [cite_start]Bu sayede sisteme gelen yeni ses verilerinin hangi kelimeye (EV mi OKUL mu) ait olduğunu olasılık puanlarına bakarak bulabiliyoruz. [cite: 19, 26]
 
-## Veri Seti
-Analiz sürecinde kullanılan, birer dakikalık aralıklarla toplanan araç geçiş sayıları:
-`[12, 15, 10, 8, 14, 11, 13, 16, 9, 12, 11, 14, 10, 15]`
+## [cite_start]Proje Yapısı [cite: 44-53]
+* `src/recognizer.py`: Yazdığım Python kodu.
+* `report/cozum_anahtari.md`: El hesaplamalarım ve analiz sorularına verdiğim cevaplar.
+* `requirements.txt`: Çalıştırmak için gereken kütüphane (numpy).
 
-## Yöntem
-Projede iki aşamalı bir çözüm yolu izlenmiştir:
-1. **Analitik Yaklaşım:** Poisson olasılık fonksiyonu kullanılarak Likelihood ve Log-Likelihood fonksiyonları türetilmiştir. Türev alma yöntemiyle teorik olarak en iyi tahminin verilerin ortalaması olduğu kanıtlanmıştır.
-2. **Sayısal Yaklaşım:** Python dili ve `scipy.optimize` kütüphanesi yardımıyla negatif log-likelihood fonksiyonu minimize edilerek sayısal sonuç elde edilmiştir.
-
-## Sonuçlar
-Yapılan hesaplamalar sonucunda elde edilen değerler:
-* **Sayısal Tahmin (MLE lambda):** 12.1429
-* **Analitik Tahmin (Aritmetik Ortalama):** 12.1429
-
-Her iki yöntemin de tutarlı sonuçlar vermesi, kurulan matematiksel modelin doğru olduğunu göstermektedir.
-
-## Yorum ve Tartışma
-* **Model Başarısı:** Görselleştirme aşamasında çizilen Poisson PMF grafiği, gerçek veri histogramı ile örtüşmektedir. Bu durum, modelin trafik akışını temsil etme yeteneğinin yüksek olduğunu gösterir.
-* **Aykırı Değer (Outlier) Analizi:** Veri setine "200" gibi yüksek bir değerin eklenmesi durumunda, MLE yöntemi (ortalamaya dayalı olduğu için) bu sapmadan ciddi şekilde etkilenmektedir. Bu durum belediyenin trafiği olduğundan çok daha yoğun sanmasına ve hatalı altyapı yatırımları (gereksiz yol genişletme vb.) yapmasına neden olabilir. Bu nedenle modelleme öncesi veri temizliği hayati önem taşır.
-
+---
+[cite_start]**Teslim Tarihi:** 08.03.2026 [cite: 55]
